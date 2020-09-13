@@ -1,6 +1,6 @@
-package org.home.main;
+package org.home.streams.main;
 
-import org.home.entities.Person;
+import org.home.streams.entities.Person;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -24,24 +24,38 @@ public class MainRunner {
         people.add(new Person(15, "Joseph", 26, Person.Authority.WORKER));
     }
 
+    /*
+    * 1. Создать коллекцию List<Person> как мы делали на уроке.
+    (как минимум 15 элементов с различным возрастом и Authority (предположим, по 7 и шеф может быть только 1)).
+    2. Произвести следующие действия:
+    * Отсортировать по возрасту.
+    * Найти только шефа.
+    * Найти всех пользователей с одинаковым именем.
+    * Найти всех WORKER
+    * Найти всех DRIVER
+    * Узнать минимальный возраст
+    * Узнать максимальный возраст
+    * Получить коллекцию имен с коллекции Person
+    * */
+
     public static void main(String[] args) {
         List<Person> people = new ArrayList<>();
         // 1 task
         initPeopleList(people);
 
         // 2 task
-            // 1
+        // 1
         System.out.println("\tSorted people by age:");
         people.sort(Comparator.comparing(Person::getAge));
         people.forEach(System.out::println);
 
-            // 2
+        // 2
         System.out.println("\tSheff:");
         people.stream()
                 .filter(prs -> prs.getAuthority() == Person.Authority.SHEFF)
                 .forEach(System.out::println);
 
-            // 3
+        // 3
         System.out.println("\tUsers with identical names:");
         List<String> peopleNames = people.stream().map(Person::getUsername)
                 .collect(Collectors.toList());
@@ -49,31 +63,31 @@ public class MainRunner {
                 .filter(prs -> Collections.frequency(peopleNames, prs.getUsername()) > 1)
                 .forEach(System.out::println);
 
-            // 4
+        // 4
         System.out.println("\tWorkers:");
         people.stream()
                 .filter(prs -> prs.getAuthority() == Person.Authority.WORKER)
                 .forEach(System.out::println);
 
-            // 5
+        // 5
         System.out.println("\tDrivers:");
         people.stream()
                 .filter(prs -> prs.getAuthority() == Person.Authority.DRIVER)
                 .forEach(System.out::println);
 
-            // 6
+        // 6
         System.out.println("\tA person with min age:");
         people.stream()
                 .min(Comparator.comparingInt(Person::getAge))
                 .ifPresent(System.out::println);
 
-            // 7
+        // 7
         System.out.println("\tA person with max age:");
         people.stream()
                 .max(Comparator.comparingInt(Person::getAge))
                 .ifPresent(System.out::println);
 
-            // 8
+        // 8
         System.out.println("\tA collection of usernames:");
         List<String> usernames = people.stream()
                 .map(Person::getUsername)

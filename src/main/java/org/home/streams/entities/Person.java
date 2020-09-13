@@ -1,5 +1,7 @@
-package org.home.entities;
+package org.home.streams.entities;
 
+// Предварительно создайте класс Person с полями int id,
+// String username, int age, enum Authority (SHEFF, WORKER, DRIVER)
 public class Person {
     public enum Authority {
         SHEFF, WORKER, DRIVER
